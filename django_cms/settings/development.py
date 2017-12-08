@@ -2,17 +2,13 @@
 import json
 import os
 import sys
-from dotenv import load_dotenv
+
 from os.path import join, dirname
 
 from .base import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# Load .env variables with python-dotenv
-dotenv_path = join(BASE_DIR, '.env')
-load_dotenv(dotenv_path)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -44,6 +40,6 @@ else:
             'HOST': '127.0.0.1',
             'PORT': '5432',
         }
-    },
- }
+    }
+
  
