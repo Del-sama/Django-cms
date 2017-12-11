@@ -3,15 +3,17 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
 # Create your models here.
 
 class Profile(models.Model):
-    role_choice = (('Lecturer', 'Lecturer'), ('Student', 'Student'))
+    LECTURER = 'LR' 
+    STUDENT = 'ST'
+    role_choice = (('LECTURER', 'Lecturer'), ('STUDENT', 'Student'))
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    role = models.CharField(max_length=100, choices=role_choice, default='Lecturer')
+    role = models.CharField(max_length=100, choices=role_choice, default='LECTURER')
     faculty = models.CharField(max_length=255)
     department = models.CharField(max_length=255)
 
@@ -35,24 +37,19 @@ class Lecturer(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='lecturer'
+        related_name='lecturers'
     )
-    course = models.ForeignKey(
-        Course,
-        on_delete=models.CASCADE,
-        related_name='lecturer'
-    )
+    courses = models.ManyToManyField(Course,
+        related_name='lecturers'
+        )
 
 
 class Student(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='student'
+        related_name='students'
     )
-    course = models.ForeignKey(
-        Course,
-        on_delete=models.CASCADE,
-        related_name='student'
-    )
-    
+    courses = models.ManyToManyField(Course,
+        related_name='students'
+        )
