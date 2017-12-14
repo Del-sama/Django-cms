@@ -22,7 +22,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # Application definition
 
 INSTALLED_APPS = [
-    'django_cms.cms_api',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -30,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_cms.cms_api',
 ]
 
 MIDDLEWARE = [
