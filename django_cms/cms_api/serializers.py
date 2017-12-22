@@ -27,12 +27,16 @@ class CourseSerializer(serializers.ModelSerializer):
 
 class LecturerSerializer(serializers.ModelSerializer):
     
+    courses = CourseSerializer(many=True)
+
     class Meta:
         model = Lectuer
         fields = ('id', 'user_id', 'courses')
 
 
 class StudentSerializer(serializers.ModelSerializer):
+    
+    courses = CourseSerializer(many=True)
     
     class Meta:
         model = Student
